@@ -41,4 +41,29 @@ public class Branch {
 		this.zipInd = zipInd;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((no == null) ? 0 : no.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Branch other = (Branch) obj;
+		if (no == null) {
+			if (other.no != null)
+				return false;
+		} else if (!no.equals(other.no))
+			return false;
+		return true;
+	}
+
 }

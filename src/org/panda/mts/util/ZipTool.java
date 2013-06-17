@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
+import org.apache.log4j.Logger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Zip;
 import org.apache.tools.ant.types.FileSet;
@@ -11,6 +12,8 @@ import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipFile;
 
 public class ZipTool {
+
+	private static Logger logger = Logger.getLogger(ZipTool.class);
 
 	public static void zip(String srcPathName, String desFileName) {
 
@@ -29,6 +32,8 @@ public class ZipTool {
 		zip.addFileset(fileSet);
 
 		zip.execute();
+
+		logger.debug("zip dir:" + srcPathName + " to " + desFileName);
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -38,7 +43,7 @@ public class ZipTool {
 			java.util.Enumeration e = zipFile.getEntries();
 
 			ZipEntry zipEntry = null;
-			/**1.先建立目录结构**/
+			/** 1.先建立目录结构 **/
 			while (e.hasMoreElements()) {
 				zipEntry = (ZipEntry) e.nextElement();
 				if (zipEntry.isDirectory()) {
@@ -49,14 +54,22 @@ public class ZipTool {
 							+ File.separator + name);
 				}
 			}
-			
-			/**2.再进行及压缩文件，避免路径不存在导致的错误**/
+
+			/** 2.再进行及压缩文件，避免路径不存在导致的错误 **/
 			e = zipFile.getEntries();
 			while (e.hasMoreElements()) {
 				zipEntry = (ZipEntry) e.nextElement();
 				if (!zipEntry.isDirectory()) {
+
 					File f = new File(outputDirectory + File.separator
 							+ zipEntry.getName());
+					logger.debug("output directory:" + outputDirectory);
+					logger.debug("file path is:" + zipEntry.getName());
+					if (outputDirectory.endsWith(".")) {
+						outputDirectory = outputDirectory.substring(0,
+								outputDirectory.length() - 1);
+					}
+
 					System.out.println(outputDirectory + File.separator
 							+ zipEntry.getName());
 

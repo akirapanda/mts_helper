@@ -4,9 +4,14 @@ import org.junit.Test;
 
 public class TestReportService {
 
-	@Test
 	public void testUnzipReportFiles() {
 		ReportService rs = new ReportService();
-		rs.unzipReportFiles();
+		rs.unzipRequestFiles();
+	}
+
+	@Test
+	public void testZipResponseFiles() {
+		ReportService rs = new ReportService();
+		rs.zipResponseFiles();
 	}
 }
