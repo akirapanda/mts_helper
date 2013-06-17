@@ -24,7 +24,7 @@ public class ReportService {
 
 	public void unzipRequestFiles() {
 
-		File folder = new File(zipFileFolder);
+		File folder = new File(downloadSourcePath);
 		for (File file : folder.listFiles()) {
 			if (file.isFile()) {
 				processZipFile(file);
