@@ -81,6 +81,7 @@ public class ZipTool {
 					while ((c = in.read(by)) != -1) {
 						out.write(by, 0, c);
 					}
+					
 					out.close();
 					in.close();
 				}

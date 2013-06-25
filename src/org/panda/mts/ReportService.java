@@ -13,21 +13,28 @@ public class ReportService {
 	public void unzipRequestFiles(String unzipSrcPath, String targetPath) {
 
 		File folder = new File(unzipSrcPath);
+		int totalCount = 0;
+
 		for (File file : folder.listFiles()) {
 			if (file.isFile()) {
-				processZipFile(file, targetPath);
+				totalCount=totalCount+processZipFile(file, targetPath);
 			}
 		}
+		log.info("total of unzip is:[ " + totalCount + " ] files");
 
 	}
 
 	public void zipResponseFiles(String zipSrcPath, String targetPath) {
 		File folder = new File(zipSrcPath);
+		int totalCount = 0;
 		for (File file : folder.listFiles()) {
 			if (file.isDirectory()) {
 				proccessResponseFiles(file, targetPath);
+				totalCount++;
 			}
 		}
+		log.info("total of zip is:[ " + totalCount + " ] files");
+
 	}
 
 	private Results proccessResponseFiles(File file, String targetPath) {
@@ -37,10 +44,10 @@ public class ReportService {
 		return results;
 	}
 
-	private Results processZipFile(File file, String targetPath) {
+	private int processZipFile(File file, String targetPath) {
 		List<Branch> branchs = CsvTool.getBranchs();
 		Results results = new Results();
-
+		int count = 0;
 		for (Branch branch : branchs) {
 			if (file.getName().length() < 10) {
 				continue;
@@ -73,10 +80,9 @@ public class ReportService {
 					log.debug("unzip file:" + file.getPath() + " to "
 							+ targetPath);
 				}
-
+				count++;
 			}
 		}
-		return results;
+		return count;
 	}
-
 }
