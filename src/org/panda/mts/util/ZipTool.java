@@ -32,7 +32,7 @@ public class ZipTool {
 		zip.addFileset(fileSet);
 
 		zip.execute();
-
+		
 		logger.debug("zip dir:" + srcPathName + " to " + desFileName);
 	}
 
@@ -41,7 +41,7 @@ public class ZipTool {
 		try {
 			ZipFile zipFile = new ZipFile(zipFileName);
 			java.util.Enumeration e = zipFile.getEntries();
-
+			
 			ZipEntry zipEntry = null;
 			/** 1.先建立目录结构 **/
 			while (e.hasMoreElements()) {
