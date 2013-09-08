@@ -46,7 +46,6 @@ public class ReportService {
 
 	private int processZipFile(File file, String targetPath) {
 		List<Branch> branchs = CsvTool.getBranchs();
-		Results results = new Results();
 		int count = 0;
 		for (Branch branch : branchs) {
 			if (file.getName().length() < 10) {
