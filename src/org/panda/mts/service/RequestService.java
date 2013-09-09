@@ -1,14 +1,15 @@
-package org.panda.mts;
+package org.panda.mts.service;
 
 import java.io.File;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.panda.mts.Branch;
 import org.panda.mts.util.CsvTool;
 import org.panda.mts.util.ZipTool;
 
-public class ReportService {
-	private Logger log = Logger.getLogger(ReportService.class.getName());
+public class RequestService {
+	private Logger log = Logger.getLogger(RequestService.class.getName());
 	private ZipTool zipTools = new ZipTool();
 
 	/***
@@ -63,29 +64,4 @@ public class ReportService {
 		}
 		return count;
 	}
-
-	/***
-	 * Process feedback file
-	 */
-
-	public void zipResponseFiles(String zipSrcPath, String targetPath) {
-		File folder = new File(zipSrcPath);
-		int totalCount = 0;
-		for (File file : folder.listFiles()) {
-			if (file.isDirectory()) {
-				proccessResponseFiles(file, targetPath);
-				totalCount++;
-			}
-		}
-		log.info("total of zip is:[ " + totalCount + " ] files");
-
-	}
-
-	private Results proccessResponseFiles(File file, String targetPath) {
-		Results results = new Results();
-		log.debug(file.getPath() + " & " + targetPath + "/" + file.getName());
-		zipTools.zip(file.getPath(), targetPath + "/" + file.getName() + ".zip");
-		return results;
-	}
-
 }

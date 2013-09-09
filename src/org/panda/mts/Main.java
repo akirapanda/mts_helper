@@ -31,7 +31,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ReportService rs = new ReportService();
+		ReportController rs = new ReportController();
 
 		Scanner in = new Scanner(System.in);
 		String readLine = "";
@@ -64,6 +64,8 @@ public class Main {
 	private static void printMenu() {
 		System.out.println("###################################");
 		System.out.println("#  WELCOME TO BOP&JSH REPORT HELP##");
+		System.out.println("#      Version:2013-09-09 Beta1.1##");
+		System.out.println("#              Author:Akira.Panda##");
 		System.out.println("###################################");
 		System.out.println("");
 		System.out.println("*PART A* BOP");
