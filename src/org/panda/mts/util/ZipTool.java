@@ -32,7 +32,6 @@ public class ZipTool {
 		zip.addFileset(fileSet);
 
 		zip.execute();
-		logger.debug("zip dir:" + srcPathName + " to " + desFileName);
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -48,8 +47,6 @@ public class ZipTool {
 					String name = zipEntry.getName();
 					name = name.substring(0, name.length() - 1);
 					mkDirs(outputDirectory + File.separator + name);
-					logger.debug("dir:" + outputDirectory + File.separator
-							+ name);
 				}
 			}
 
@@ -61,16 +58,10 @@ public class ZipTool {
 
 					File f = new File(outputDirectory + File.separator
 							+ zipEntry.getName());
-					logger.debug("output directory:" + outputDirectory);
-					logger.debug("file path is:" + zipEntry.getName());
 					if (outputDirectory.endsWith(".")) {
 						outputDirectory = outputDirectory.substring(0,
 								outputDirectory.length() - 1);
 					}
-
-					logger.debug(outputDirectory + File.separator
-							+ zipEntry.getName());
-
 					f.createNewFile();
 					InputStream in = zipFile.getInputStream(zipEntry);
 					FileOutputStream out = new FileOutputStream(f);
