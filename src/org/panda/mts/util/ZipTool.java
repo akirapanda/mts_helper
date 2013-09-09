@@ -48,8 +48,8 @@ public class ZipTool {
 					String name = zipEntry.getName();
 					name = name.substring(0, name.length() - 1);
 					mkDirs(outputDirectory + File.separator + name);
-					System.out.println("dir:" + outputDirectory
-							+ File.separator + name);
+					logger.debug("dir:" + outputDirectory + File.separator
+							+ name);
 				}
 			}
 
@@ -68,7 +68,7 @@ public class ZipTool {
 								outputDirectory.length() - 1);
 					}
 
-					System.out.println(outputDirectory + File.separator
+					logger.debug(outputDirectory + File.separator
 							+ zipEntry.getName());
 
 					f.createNewFile();
@@ -85,7 +85,7 @@ public class ZipTool {
 			}
 			zipFile.close();
 		} catch (Exception ex) {
-			System.out.println("解压文件异常" + ex.getMessage());
+			logger.error("解压文件异常" + ex.getMessage());
 			ex.printStackTrace();
 		}
 	}
