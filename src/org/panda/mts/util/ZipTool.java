@@ -15,7 +15,7 @@ public class ZipTool {
 
 	private static Logger logger = Logger.getLogger(ZipTool.class);
 
-	public static void zip(String srcPathName, String desFileName) {
+	public void zip(String srcPathName, String desFileName) {
 
 		File zipFile = new File(desFileName);
 		File srcdir = new File(srcPathName);
@@ -32,16 +32,14 @@ public class ZipTool {
 		zip.addFileset(fileSet);
 
 		zip.execute();
-		
 		logger.debug("zip dir:" + srcPathName + " to " + desFileName);
 	}
 
 	@SuppressWarnings("rawtypes")
-	public static void unzip(String zipFileName, String outputDirectory) {
+	public void unzip(String zipFileName, String outputDirectory) {
 		try {
 			ZipFile zipFile = new ZipFile(zipFileName);
 			java.util.Enumeration e = zipFile.getEntries();
-			
 			ZipEntry zipEntry = null;
 			/** 1.先建立目录结构 **/
 			while (e.hasMoreElements()) {
@@ -81,11 +79,11 @@ public class ZipTool {
 					while ((c = in.read(by)) != -1) {
 						out.write(by, 0, c);
 					}
-					
 					out.close();
 					in.close();
 				}
 			}
+			zipFile.close();
 		} catch (Exception ex) {
 			System.out.println("解压文件异常" + ex.getMessage());
 			ex.printStackTrace();
@@ -95,7 +93,7 @@ public class ZipTool {
 	/**
 	 * 创建目录，包括子目录
 	 */
-	private static void mkDirs(String dir) throws Exception {
+	private void mkDirs(String dir) throws Exception {
 		if (dir == null || dir.equals(""))
 			return;
 		File f1 = new File(dir);

@@ -9,7 +9,7 @@ import org.panda.mts.util.ZipTool;
 
 public class ReportService {
 	private Logger log = Logger.getLogger(ReportService.class.getName());
-
+	private ZipTool zipTools=new ZipTool();
 	public void unzipRequestFiles(String unzipSrcPath, String targetPath) {
 
 		File folder = new File(unzipSrcPath);
@@ -40,7 +40,7 @@ public class ReportService {
 	private Results proccessResponseFiles(File file, String targetPath) {
 		Results results = new Results();
 		log.debug(file.getPath() + " & " + targetPath + "/" + file.getName());
-		ZipTool.zip(file.getPath(), targetPath + "/" + file.getName() + ".zip");
+		zipTools.zip(file.getPath(), targetPath + "/" + file.getName() + ".zip");
 		return results;
 	}
 
@@ -69,12 +69,12 @@ public class ReportService {
 					if (!f1.exists())
 						f1.mkdirs();
 
-					ZipTool.unzip(file.getPath(), targetPath + "//"
+					zipTools.unzip(file.getPath(), targetPath + "//"
 							+ zipFileName);
 					log.debug("unzip file:" + file.getPath() + " to "
 							+ targetPath + "//" + zipFileName);
 				} else {
-					ZipTool.unzip(file.getPath(), targetPath);
+					zipTools.unzip(file.getPath(), targetPath);
 
 					log.debug("unzip file:" + file.getPath() + " to "
 							+ targetPath);

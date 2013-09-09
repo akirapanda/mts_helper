@@ -55,6 +55,7 @@ public class Main {
 			printMenu();
 
 		}
+		in.close();
 		sayGoodBye();
 		// ReportService rs = new ReportService();
 		// rs.unzipRequestFiles();
